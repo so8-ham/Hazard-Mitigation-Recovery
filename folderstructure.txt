@@ -1,0 +1,77 @@
+backend
+│
+├── src
+│
+│   ├── models
+│   │   ├── mainAdmin.model.js
+│   │   ├── localAdmin.model.js
+│   │   └── otp.model.js
+│
+│   ├── controllers
+│   │   ├── mainAdmin.controller.js
+│   │   ├── localAdmin.controller.js
+│   │   ├── auth.controller.js
+│   │   └── profile.controller.js
+│
+│   ├── routes
+│   │   ├── mainAdmin.routes.js
+│   │   ├── localAdmin.routes.js
+│   │   ├── auth.routes.js
+│   │   └── profile.routes.js
+│
+│   ├── middlewares
+│   │   ├── auth.middleware.js
+│   │   ├── role.middleware.js
+│   │   └── error.middleware.js
+│
+│   ├── utils
+│   │   ├── generateOTP.js
+│   │   ├── sendEmail.js
+│   │   ├── hashPassword.js
+│   │   └── generateToken.js
+│
+│   ├── config
+│   │   ├── db.js
+│   │   └── mail.js
+│
+│   ├── constants
+│   │   └── roles.js
+│
+│   ├── app.js
+│   └── server.js
+│
+├── .env
+├── package.json
+
+
+//config folder..
+db.js → MongoDB connection
+mail.js → Email service for OTP
+
+//model folder..
+mainAdmin.model.js → Main Admin data
+localAdmin.model.js → Local Admin data
+otp.model.js → OTP verification
+
+// controllers folder..
+auth.controller.js → Register & Login
+mainAdmin.controller.js → Create Local Admin
+localAdmin.controller.js → Local admin actions
+profile.controller.js → Profile management
+
+//routes folder...
+auth.routes.js
+mainAdmin.routes.js
+localAdmin.routes.js
+profile.routes.js
+
+//middleware folder
+auth.middleware.js → Verify JWT
+role.middleware.js → Check role
+error.middleware.js → Global error handling
+
+// utils folder..
+generateOTP.js
+generateToken.js
+sendEmail.js
+passwordHash.js

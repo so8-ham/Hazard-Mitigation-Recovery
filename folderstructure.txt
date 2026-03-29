@@ -75,3 +75,91 @@ generateOTP.js
 generateToken.js
 sendEmail.js
 passwordHash.js
+
+
+// for checking whether...
+
+backend/
+│
+├── controllers/
+│   ├── proposal.controller.js
+│   ├── vote.controller.js
+│   ├── notification.controller.js
+│   └── payment.controller.js
+│
+├── models/
+│   ├── proposal.model.js
+│   ├── vote.model.js
+│   ├── notification.model.js
+│   └── transaction.model.js
+│
+├── routes/
+│   ├── proposal.routes.js
+│   ├── vote.routes.js
+│   ├── notification.routes.js
+│
+├── services/
+│   ├── voting.service.js
+│   ├── payment.service.js
+│   └── notification.service.js
+
+
+//work flow...
+Local Admin sends data
+      ↓
+Create proposal
+      ↓
+Send notification to all Main Admins
+      ↓
+Each Main Admin votes privately
+      ↓
+Votes counted
+      ↓
+Majority reached
+      ↓
+Proposal approved
+      ↓
+Payment triggered
+      ↓
+Transaction saved
+      ↓
+Local Admin notified
+
+
+//API..
+AUTH
+POST /api/auth/register-main-admin
+POST /api/auth/login
+POST /api/auth/forgot-password
+POST /api/auth/verify-otp
+POST /api/auth/reset-password
+
+MAIN ADMIN
+POST /api/main-admin/create-local-admin
+GET /api/main-admin/local-admins
+PUT /api/main-admin/local-admin/:id
+DELETE /api/main-admin/local-admin/:id
+
+LOCAL ADMIN
+GET /api/local-admin/profile
+PUT /api/local-admin/profile
+DELETE /api/local-admin/delete-account
+
+PROPOSAL
+POST /api/proposal/create
+GET /api/proposal/my-proposals
+GET /api/proposal/all
+GET /api/proposal/:id
+
+VOTING
+POST /api/vote/:proposalId
+GET /api/vote/proposal/:proposalId
+
+NOTIFICATION
+GET /api/notification/my
+PUT /api/notification/read/:id
+DELETE /api/notification/delete/:id
+
+PAYMENT
+POST /api/payment/payout/:proposalId
+GET /api/payment/transactions

@@ -7,6 +7,10 @@ import dotenv from "dotenv";
 import mainAdminRoutes from "./routes/mainAdmin.routes.js";
 import localAdminRoutes from "./routes/localAdmin.routes.js";
 import authRoutes from "./routes/password.routes.js";
+import proposalRoutes from "./routes/proposal.routes.js";
+import transactionRoutes from "./routes/transaction.routes.js";
+import notificationRoutes from "./routes/notification.routes.js";
+import voteRoutes from "./routes/vote.routes.js";
 
 
 import errorMiddleware from "./middlewares/error.middleware.js";
@@ -40,6 +44,10 @@ app.get("/", (req, res) => {
 app.use("/api/main-admin", mainAdminRoutes);
 app.use("/api/local-admin", localAdminRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/proposals", proposalRoutes);
+app.use("/api/transactions", transactionRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/votes", voteRoutes);
 
 
 // 404 route

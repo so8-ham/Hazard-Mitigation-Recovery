@@ -1,47 +1,86 @@
 backend
 │
-├── src
-│
-│   ├── models
-│   │   ├── mainAdmin.model.js
-│   │   ├── localAdmin.model.js
-│   │   └── otp.model.js
-│
-│   ├── controllers
-│   │   ├── mainAdmin.controller.js
-│   │   ├── localAdmin.controller.js
-│   │   ├── auth.controller.js
-│   │   └── profile.controller.js
-│
-│   ├── routes
-│   │   ├── mainAdmin.routes.js
-│   │   ├── localAdmin.routes.js
-│   │   ├── auth.routes.js
-│   │   └── profile.routes.js
-│
-│   ├── middlewares
-│   │   ├── auth.middleware.js
-│   │   ├── role.middleware.js
-│   │   └── error.middleware.js
-│
-│   ├── utils
-│   │   ├── generateOTP.js
-│   │   ├── sendEmail.js
-│   │   ├── hashPassword.js
-│   │   └── generateToken.js
-│
-│   ├── config
-│   │   ├── db.js
-│   │   └── mail.js
-│
-│   ├── constants
-│   │   └── roles.js
-│
-│   ├── app.js
-│   └── server.js
-│
-├── .env
+├── server.js
+├── app.js
 ├── package.json
+│
+├── config
+│   ├── db.js
+│   ├── mail.js
+│   ├── redis.js
+│   └── p2p.config.js
+│
+├── models
+│   ├── mainAdmin.model.js
+│   ├── localAdmin.model.js
+│   ├── otp.model.js
+│   ├── proposal.model.js
+│   ├── vote.model.js
+│   ├── notification.model.js
+│   ├── transaction.model.js
+│   ├── sensorData.model.js
+│   └── nodePeer.model.js
+│
+├── controllers
+│   ├── auth.controller.js
+│   ├── mainAdmin.controller.js
+│   ├── localAdmin.controller.js
+│   ├── proposal.controller.js
+│   ├── vote.controller.js
+│   ├── notification.controller.js
+│   ├── transaction.controller.js
+│   ├── sensor.controller.js
+│   └── network.controller.js
+│
+├── routes
+│   ├── auth.routes.js
+│   ├── mainAdmin.routes.js
+│   ├── localAdmin.routes.js
+│   ├── proposal.routes.js
+│   ├── vote.routes.js
+│   ├── notification.routes.js
+│   ├── transaction.routes.js
+│   ├── sensor.routes.js
+│   └── network.routes.js
+│
+├── middleware
+│   ├── auth.middleware.js
+│   ├── protect.middleware.js
+│   ├── role.middleware.js
+│   ├── error.middleware.js
+│   └── rateLimit.middleware.js
+│
+├── services
+│   ├── weather.service.js
+│   ├── prediction.service.js
+│   ├── routing.service.js
+│   ├── consensus.service.js
+│   ├── notification.service.js
+│   ├── transaction.service.js
+│   ├── sensor.service.js
+│   └── p2p.service.js
+│
+├── p2p
+│   ├── node.js
+│   ├── peerDiscovery.js
+│   ├── broadcast.js
+│   ├── messageHandler.js
+│   └── consensusSync.js
+│
+├── utils
+│   ├── generateToken.js
+│   ├── encrypt.js
+│   ├── distanceCalculator.js
+│   └── logger.js
+│
+├── jobs
+│   ├── consensus.job.js
+│   ├── notification.job.js
+│   └── retryPayment.job.js
+│
+└── docs
+    ├── apiDocs.md
+    └── architecture.md
 
 
 //config folder..

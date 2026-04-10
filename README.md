@@ -2,127 +2,171 @@
 
 ## Overview
 
-This repository contains the backend API for a hazard mitigation and recovery system built with Node.js and Express. It supports role-based admin authentication, proposal creation, voting workflows, transaction tracking, notifications, and disaster response data management.
+This repository contains a full-stack Hazard Mitigation and Recovery system with:
+- `backend/`: Node.js + Express API
+- `frontend/`: React + Vite UI
 
-## Key Features
+The app supports Main Admin and Local Admin workflows for proposal management, voting, notifications, transaction tracking, and OTP-enabled password recovery.
 
-- JWT-based authentication for Main Admin and Local Admin users
-- Role-based access control and secure routing
-- Proposal submission and approval workflow
-- Vote recording and proposal status handling
-- Notification delivery and management
-- Transaction logging for approved proposals
-- MongoDB persistence via Mongoose
-- Email OTP verification for password recovery
+## Working Details
+
+### Backend
+
+The backend provides REST APIs for:
+- Authentication and role-based authorization
+- Main Admin management
+- Local Admin profile and proposal creation
+- Proposal approval workflow and voting
+- Notification management
+- Transaction logging
+- OTP-based password recovery via email
+
+The backend runs on port `4040` by default.
+
+### Frontend
+
+The frontend is a React application built with Vite. It consumes the backend API and provides:
+- Login and password reset flows
+- Dashboard views for Main Admin and Local Admin
+- Proposal creation and list views
+- Transaction and notification pages
+- Role-aware routing and protected pages
+
+The frontend runs on port `5173` by default.
 
 ## Technology Stack
 
-- Node.js
-- Express
-- MongoDB / Mongoose
-- JSON Web Tokens (JWT)
-- bcryptjs for password hashing
-- dotenv for environment configuration
-- helmet and cors for security
-- morgan for request logging
-- nodemailer for email notifications
+- Backend: Node.js, Express, MongoDB, Mongoose
+- Frontend: React, Vite, Axios, React Router
+- Auth: JWT, bcryptjs
+- Security: helmet, cors
+- Logging: morgan
+- Email: nodemailer
 
-## Repository Structure
+## Project Folder Structure
 
-- `backend/src/app.js` - Express app setup
-- `backend/src/server.js` - Server bootstrap
-- `backend/src/config/` - Database and mail configuration
-- `backend/src/controllers/` - Request handlers
-- `backend/src/routes/` - API route definitions
-- `backend/src/models/` - Mongoose models
-- `backend/src/middleware/` - Auth, roles, and error handling
-- `backend/src/services/` - Business logic and external services
+```
+hackathon/
+├── backend/
+│   ├── src/
+│   │   ├── app.js
+│   │   ├── server.js
+│   │   ├── config/
+│   │   │   ├── db.js
+│   │   │   └── mail.js
+│   │   ├── controllers/
+│   │   │   ├── auth.controller.js
+│   │   │   ├── mainAdmin.controller.js
+│   │   │   ├── localAdmin.controller.js
+│   │   │   ├── proposal.controller.js
+│   │   │   ├── transaction.controller.js
+│   │   │   ├── vote.controller.js
+│   │   │   └── notification.controller.js
+│   │   ├── models/
+│   │   │   ├── mainadmin.model.js
+│   │   │   ├── localadmin.model.js
+│   │   │   ├── otp.model.js
+│   │   │   ├── proposal.model.js
+│   │   │   ├── transaction.model.js
+│   │   │   ├── vote.model.js
+│   │   │   └── notification.model.js
+│   │   ├── routes/
+│   │   │   ├── mainAdmin.routes.js
+│   │   │   ├── localAdmin.routes.js
+│   │   │   ├── proposal.routes.js
+│   │   │   ├── transaction.routes.js
+│   │   │   ├── vote.routes.js
+│   │   │   └── notification.routes.js
+│   │   └── middlewares/
+│   │       ├── auth.middleware.js
+│   │       ├── role.middleware.js
+│   │       └── error.middleware.js
+│   ├── package.json
+│   └── .env
+├── frontend/
+│   ├── public/
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── axios.js
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── DashboardLayout.jsx
+│   │   │   └── Sidebar.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   ├── pages/
+│   │   │   ├── auth/
+│   │   │   │   ├── ForgotPasswordPage.jsx
+│   │   │   │   └── LoginPage.jsx
+│   │   │   ├── localAdmin/
+│   │   │   │   ├── DashboardPage.jsx
+│   │   │   │   ├── MyProposalsPage.jsx
+│   │   │   │   ├── MyTransactionsPage.jsx
+│   │   │   │   ├── NewProposalPage.jsx
+│   │   │   │   └── ProfilePage.jsx
+│   │   │   ├── mainAdmin/
+│   │   │   │   ├── AllProposalsPage.jsx
+│   │   │   │   ├── DashboardPage.jsx
+│   │   │   │   ├── LocalAdminsPage.jsx
+│   │   │   │   └── TransactionsPage.jsx
+│   │   │   └── shared/
+│   │   │       └── NotificationsPage.jsx
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+└── folderstructure.txt
+```
 
-## Getting Started
+## Setup and Run
 
-1. Clone the repository:
+### Backend
 
-   ```bash
-   git clone https://github.com/so8-ham/Hazard-Mitigation-Recovery.git
-   cd Hazard-Mitigation-Recovery/backend
-   ```
-
+1. Open a terminal in `backend/`
 2. Install dependencies:
-
    ```bash
    npm install
    ```
-
-3. Create a `.env` file in `backend/` and set the required values:
-
+3. Add `.env` in `backend/` with:
    ```env
-   PORT=5000
+   PORT=4040
    MONGO_URI=your_mongo_connection_string
    JWT_SECRET=your_jwt_secret
-   JWT_EXPIRES_IN=1d
-   EMAIL_HOST=smtp.example.com
-   EMAIL_PORT=587
-   EMAIL_USER=your_email@example.com
-   EMAIL_PASS=your_email_password
+   EMAIL_USER=your_email@gmail.com
+   EMAIL_PASS=your_email_password_or_app_password
    ```
-
-4. Start the server:
-
+4. Start backend:
    ```bash
    npm run dev
    ```
 
-## Available Scripts
+### Frontend
 
-- `npm start` - Start the server in production mode
-- `npm run dev` - Start the server with nodemon for development
+1. Open a terminal in `frontend/`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start frontend:
+   ```bash
+   npm run dev
+   ```
+4. Open browser at:
+   - `http://localhost:5173`
 
-## API Endpoints
+## API Base URL
 
-### Authentication
+- Backend API base: `http://localhost:4040/api`
 
-- `POST /api/auth/register-main-admin`
-- `POST /api/auth/login`
-- `POST /api/auth/forgot-password`
-- `POST /api/auth/verify-otp`
-- `POST /api/auth/reset-password`
+## Important Notes
 
-### Main Admin
-
-- `POST /api/main-admin/create-local-admin`
-- `GET /api/main-admin/local-admins`
-- `PUT /api/main-admin/local-admin/:id`
-- `DELETE /api/main-admin/local-admin/:id`
-
-### Local Admin
-
-- `GET /api/local-admin/profile`
-- `PUT /api/local-admin/profile`
-- `DELETE /api/local-admin/delete-account`
-
-### Proposals
-
-- `POST /api/proposal/create`
-- `GET /api/proposal/my-proposals`
-- `GET /api/proposal/all`
-- `GET /api/proposal/:id`
-
-### Voting
-
-- `POST /api/vote/:proposalId`
-- `GET /api/vote/proposal/:proposalId`
-
-### Notifications
-
-- `GET /api/notification/my`
-- `PUT /api/notification/read/:id`
-- `DELETE /api/notification/delete/:id`
-
-## Notes
-
-- This project focuses on backend API functionality. A frontend may be added separately.
-- Ensure MongoDB is running and accessible from the configured `MONGO_URI`.
-- If using email features, verify SMTP credentials and network access.
+- The frontend uses Axios to call the backend at `http://localhost:4040/api`.
+- OTP emails require valid Gmail credentials configured in `backend/.env`.
+- The backend uses MongoDB via the connection URI in `MONGO_URI`.
+- If using Gmail with 2FA, generate an App Password and use that in `EMAIL_PASS`.
 
 ## License
 
